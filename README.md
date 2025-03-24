@@ -1,5 +1,3 @@
-## NOTE - drivers will be released upon product launch which is scheduled for April 2025.
-
 # Videtronic V-Link drivers for Nvidia platforms 
 
 Welcome to the official Videtronic repository for the **v-link** drivers!  
