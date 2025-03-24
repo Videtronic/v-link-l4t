@@ -424,7 +424,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
@@ -818,7 +818,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
@@ -1212,7 +1212,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
@@ -1606,7 +1606,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
@@ -1998,7 +1998,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
@@ -2390,7 +2390,7 @@
 								gpio-controller;
 								#gpio-cells = <2>;
 								bus-width = <2>;
-								link-freq = "450000000";
+								link-freq = "500000000";
 								
 								ports {
 									#address-cells = <1>;
