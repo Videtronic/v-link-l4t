@@ -25,6 +25,9 @@
 
 #define V_LINK_SER_N_PADS (V_LINK_SER_N_SRC_PADS + V_LINK_SER_N_SINK_PADS)
 
+#undef dev_dbg
+#define dev_dbg dev_info
+
 #define MAX96717_NUM_GPIO 1
 #define MAX96717_GPIO_REG_A(gpio) (0x2be + (gpio)*3)
 #define MAX96717_GPIO_OUT BIT(4)
@@ -72,7 +75,7 @@ static int v_link_ser_i2c_mux_select(struct i2c_mux_core *mux, u32 chan)
 static int v_link_ser_i2c_mux_init(struct v_link_ser_priv *priv)
 {
 	priv->mux = i2c_mux_alloc(priv->client->adapter, &priv->client->dev, 1,
-				  0, 0, 
+				  0, 0, //I2C_MUX_LOCKED | I2C_MUX_GATE,
 				  v_link_ser_i2c_mux_select, NULL);
 	if (!priv->mux)
 		return -ENOMEM;
@@ -200,6 +203,11 @@ static int v_link_ser_gpiochip_probe(struct v_link_ser_priv *priv) {
 
   if (ret)
     return ret;
+  
+  // v_link_ser_update_bits(priv, 0x2bf,
+  //                                BIT(7) | BIT(6), 1);
+  // v_link_ser_update_bits(priv, 0x2be,
+  //                                BIT(7), 0);
 
   ret = devm_gpiochip_add_data(dev, gc, priv);
   if (ret) {
@@ -374,6 +382,9 @@ static int v_link_ser_v4l2_register(struct v_link_ser_priv *priv) {
 
   v4l2_ctrl_handler_init(&priv->ctrls, 1);
   priv->sd.ctrl_handler = &priv->ctrls;
+
+  // v4l2_ctrl_new_int_menu(&priv->ctrls, NULL, V4L2_CID_LINK_FREQ, 0, 0,
+  //                        &priv->link_freq);
 
   if (priv->ctrls.error) {
     ret = priv->ctrls.error;

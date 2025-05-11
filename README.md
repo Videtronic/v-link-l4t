@@ -25,7 +25,7 @@ Visit us at https://videtronic.com/
 - Reliable performance for video data transmission
 
 ## Versioning
-This repository is versioned based on the Jetson Linux release. Each branch corresponds to a specific release (e.g., `l4t-r36`). Ensure you use the branch matching your version for optimal compatibility.
+This repository is versioned based on the Jetson Linux release. Each branch corresponds to a specific release (e.g., `l4t-r35`). Ensure you use the branch matching your version for optimal compatibility.
 
 For more information regarding Jetson Linux, visit official Nvidia website [here](https://developer.nvidia.com/embedded/jetson-linux)
 
@@ -50,17 +50,14 @@ cat /etc/nv_tegra_release
 ```
 Sample output:
 ```
-# R36 (release), REVISION: 4.3, GCID: 38968081, BOARD: generic, EABI: aarch64, DATE: Wed Jan  8 01:49:37 UTC 2025
-# KERNEL_VARIANT: oot
-TARGET_USERSPACE_LIB_DIR=nvidia
-TARGET_USERSPACE_LIB_DIR_PATH=usr/lib/aarch64-linux-gnu/nvidia
+# R35 (release), REVISION: 6.1, GCID: 39721438, BOARD: t186ref, EABI: aarch64, DATE: Tue Mar  4 10:13:09 UTC 2025
 ```
-This indicates you are using the Jeton Linux 36.X.Y version.
+This indicates you are using the Jeton Linux 35.X.Y version.
 
 ### Step 2: Clone the Appropriate Branch
-Clone the repository branch matching your linux version. For the **R36** branch:
+Clone the repository branch matching your linux version. For the **R35** branch:
 ```bash
-git clone --branch l4t-r36 https://github.com/Videtronic/v-link-l4t.git
+git clone --branch l4t-r35 https://github.com/Videtronic/v-link-l4t.git
 cd v-link-l4t
 ```
 ### Step 3: Enter driver directory
@@ -145,15 +142,27 @@ sudo reboot
 
 ## Troubleshooting
 
-- **Q: When using single camera module with v-link my camera preview is black**  
+- **Q: When using single camera module with v-link my camera preview is black or distorted**  
   A: Boost clocks using following script
   ```bash
-  sudo chmod +x scripts/boost_clocks.sh
+  cd scripts
+  sudo chmod +x boost_clocks.sh
   sudo su
   ./boost_clocks.sh
   ```  
-
-
+- **Q: I encountered error during ```sudo make install``` step:
+  ```bash
+  - SSL error:02001002:system library:fopen:No such file or directory: ../crypto/bio/bss_file.c:69
+  - SSL error:2006D080:BIO routines:BIO_new_file:no such file: ../crypto/bio/bss_file.c:76
+  sign-file: certs/signing_key.pem: No such file or directory
+  ```
+  
+  A: Generate and install key files using following script
+  ```bash
+  cd scripts
+  chmod +x gen_key.sh
+  ./gen_key.sh
+  ``` 
 
 ## Contribution Guidelines
 We welcome contributions to improve our drivers and documentation! To contribute:

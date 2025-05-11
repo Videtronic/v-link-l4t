@@ -27,6 +27,9 @@
 
 #define V_LINK_DESER_N_PADS (V_LINK_DESER_N_SRC_PADS + V_LINK_DESER_N_SINK_PADS)
 
+#undef dev_dbg
+#define dev_dbg dev_info
+
 #define MAX96714_MIPI_STDBY_N (0x0332)
 #define MAX96714_MIPI_STDBY_MASK GENMASK(5, 4)
 #define MAX96714_BACKTOP25 (0x0320)
@@ -64,7 +67,7 @@ static int v_link_deser_i2c_mux_select(struct i2c_mux_core *mux, u32 chan)
 static int v_link_deser_i2c_mux_init(struct v_link_deser_priv *priv)
 {
 	priv->mux = i2c_mux_alloc(priv->client->adapter, &priv->client->dev, 1,
-				  0, 0,
+				  0, 0, //I2C_MUX_LOCKED | I2C_MUX_GATE,
 				  v_link_deser_i2c_mux_select, NULL);
 	if (!priv->mux)
 		return -ENOMEM;
@@ -140,7 +143,7 @@ static int v_link_deser_setup(struct v_link_deser_priv *priv) {
   }
 
   /* Fixed values for this register based on HW design */
-  val = 0x3b;
+  val = 0x3b; // 0x23;
   ret = v_link_deser_write(priv, MAX96714_MIPI_POLARITY, val);
   if (ret) {
     dev_err(dev, "Unable to set MAX96714_MIPI_POLARITY reg");
