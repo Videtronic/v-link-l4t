@@ -150,7 +150,7 @@ sudo reboot
   sudo su
   ./boost_clocks.sh
   ```  
-- **Q: I encountered error during ```sudo make install``` step:
+- **Q: I encountered error during ```sudo make install``` step:**
   ```bash
   - SSL error:02001002:system library:fopen:No such file or directory: ../crypto/bio/bss_file.c:69
   - SSL error:2006D080:BIO routines:BIO_new_file:no such file: ../crypto/bio/bss_file.c:76
